@@ -1,5 +1,3 @@
-# env_variables.py
-
 import os
 
 # Set the environment variable

@@ -9,7 +9,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
 import chainlit as cl
 
-# Import the environment variables
+# noinspection PyUnresolvedReferences
 import env_variables
 
 # Set up Retrieval QA model
