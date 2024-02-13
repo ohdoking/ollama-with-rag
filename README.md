@@ -18,6 +18,11 @@ Before you begin, ensure you have met the following requirements:
 ```bash
   pip install -r requirements.txt
 ```
+3. create folder for data and vector store:
+```bash
+  mkdir data
+  mkdir vectorstores/db
+```
 
 ## 🚀 How to Use the Project
 Follow these steps to get the project up and running:

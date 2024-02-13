@@ -9,8 +9,9 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
 import chainlit as cl
 
-# noinspection PyUnresolvedReferences
-import env_variables
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
 
 # Set up Retrieval QA model
 QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-mistral")
@@ -40,7 +41,7 @@ def retrieval_qa_chain(llm, vectorstore):
 
 def qa_bot(llm):
     """Initialize the QA Bot."""
-    vectorstore = Chroma(persist_directory=os.environ['DB_PATH'], embedding_function=GPT4AllEmbeddings())
+    vectorstore = Chroma(persist_directory=os.getenv('DB_PATH'), embedding_function=GPT4AllEmbeddings())
 
     qa = retrieval_qa_chain(llm, vectorstore)
     return qa

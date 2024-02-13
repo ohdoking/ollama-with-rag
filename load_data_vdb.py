@@ -5,14 +5,15 @@ from langchain.document_loaders.pdf import PyPDFDirectoryLoader
 from langchain.vectorstores import Chroma
 from langchain.embeddings import GPT4AllEmbeddings
 
-# noinspection PyUnresolvedReferences
-import env_variables
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def create_vector_db():
     """Create a vector database from PDF documents."""
     # Load documents from the specified directory
-    loader = PyPDFDirectoryLoader(os.environ['DATA_PATH'])
+    loader = PyPDFDirectoryLoader(os.getenv('DATA_PATH'))
     documents = loader.load()
     print(f"Processed {len(documents)} pdf files")
 
@@ -24,7 +25,7 @@ def create_vector_db():
     vectorStore = Chroma.from_documents(
         documents=texts,
         embedding=GPT4AllEmbeddings(),
-        persist_directory=os.environ['DB_PATH']
+        persist_directory=os.getenv('DB_PATH')
     )
 
     # Persist the vector store to disk

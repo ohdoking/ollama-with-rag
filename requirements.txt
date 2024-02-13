@@ -5,3 +5,4 @@ gpt4all
 langchainhub
 pypdf
 chainlit
+python-dotenv
