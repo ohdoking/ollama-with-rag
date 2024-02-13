@@ -162,4 +162,5 @@ cython_debug/
 
 # Local data
 data/
+vectorstores/db/
 
