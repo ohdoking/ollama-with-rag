@@ -1,18 +1,24 @@
+import os
+
 from langchain import hub
 from langchain.embeddings import GPT4AllEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.llms import Ollama
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-import chainlit as cl
 from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
+import chainlit as cl
 
+# Import the environment variables
+import env_variables
 
 # Set up Retrieval QA model
 QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-mistral")
 
+
 # load the LLM
 def load_llm():
+    """Load the Language Model."""
     llm = Ollama(
         model="mistral",
         verbose=True,
@@ -22,6 +28,7 @@ def load_llm():
 
 
 def retrieval_qa_chain(llm, vectorstore):
+    """Set up the Retrieval QA Chain."""
     qa_chain = RetrievalQA.from_chain_type(
         llm,
         retriever=vectorstore.as_retriever(),
@@ -31,18 +38,19 @@ def retrieval_qa_chain(llm, vectorstore):
     return qa_chain
 
 
-def qa_bot():
-    llm = load_llm()
-    DB_PATH = "vectorstores/db/"
-    vectorstore = Chroma(persist_directory=DB_PATH, embedding_function=GPT4AllEmbeddings())
+def qa_bot(llm):
+    """Initialize the QA Bot."""
+    vectorstore = Chroma(persist_directory=os.environ['DB_PATH'], embedding_function=GPT4AllEmbeddings())
 
     qa = retrieval_qa_chain(llm, vectorstore)
-    return qa, llm
+    return qa
 
 
 @cl.on_chat_start
 async def start():
-    chain, llm = qa_bot()
+    """Start the chat."""
+    llm = load_llm()
+    chain = qa_bot(llm)
     msg = cl.Message(content="Firing up the research info bot...")
     await msg.send()
     msg.content = "Hi, welcome to research info bot. What is your query?"
@@ -52,6 +60,7 @@ async def start():
 
 @cl.on_message
 async def main(message):
+    """Handle incoming messages."""
     chain = cl.user_session.get("chain")
     cb = cl.AsyncLangchainCallbackHandler(
         stream_final_answer=True,
