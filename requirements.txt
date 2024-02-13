@@ -1,0 +1,7 @@
+chromadb
+langchain
+BeautifulSoup4
+gpt4all
+langchainhub
+pypdf
+chainlit
