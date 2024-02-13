@@ -1,6 +1,6 @@
 # Ollama with RAG and Chainlit
 
-This project is designed to use Ollama locally, run it with RAG (Real-time Augmented Graph), and use Chainlit for a UI chatbot.
+This project is designed to use Ollama locally, run it with RAG (Retrieval-Augmented Generation), and use Chainlit for a UI chatbot.
 
 ## 🛠️ Tech Stack
 
