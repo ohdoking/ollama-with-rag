@@ -17,17 +17,17 @@ load_dotenv()
 # Set up Retrieval QA model
 # QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-mistral")
 
-prompt_template = """Use the following pieces of context to answer the users question.
-If you don't know the answer, just say that you don't know, don't try to make up an answer.
+prompt_template = """
+<s> [INST] 
+You are an assistant for question-answering tasks. 
+Use the following pieces of retrieved context to answer the question. 
+If you don't know the answer, just say that you don't know. 
+Use three sentences maximum and keep the answer concise. 
 ALWAYS return a "SOURCES" part in your answer.
 The "SOURCES" part should be a reference to the source of the document from which you got your answer.
-The example of your response should be:
-
-Context: {context}
-Question: {question}
-
-Only return the helpful answer below and nothing else.
-Helpful answer:
+[/INST] </s> 
+[INST] Question: {question} 
+Context: {context} [/INST]
 """
 
 
