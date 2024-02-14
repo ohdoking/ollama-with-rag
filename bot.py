@@ -18,16 +18,14 @@ load_dotenv()
 # QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-mistral")
 
 prompt_template = """
-<s> [INST] 
-You are an assistant for question-answering tasks. 
-Use the following pieces of retrieved context to answer the question. 
-If you don't know the answer, just say that you don't know. 
-Use three sentences maximum and keep the answer concise. 
-ALWAYS return a "SOURCES" part in your answer.
-The "SOURCES" part should be a reference to the source of the document from which you got your answer.
-[/INST] </s> 
-[INST] Question: {question} 
-Context: {context} [/INST]
+    Use the following pieces of context to answer the question at the end.
+    If you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+    {context}
+
+    Question: {question}
+
+    Helpful Answer:
 """
 
 
@@ -56,7 +54,7 @@ def retrieval_qa_chain(llm, prompt, vectorstore):
    Creates a Retrieval Question-Answering (QA) chain using a given language model, prompt, and database.
 
    This function initializes a RetrievalQA object with a specific chain type and configurations,
-   and returns this QA chain.
+   and returns this QA chain. The retriever is set up to return the top 3 results (k=3).
 
    Args:
        llm (any): The language model to be used in the RetrievalQA.
