@@ -56,7 +56,7 @@ def retrieval_qa_chain(llm, prompt, vectorstore):
    Creates a Retrieval Question-Answering (QA) chain using a given language model, prompt, and database.
 
    This function initializes a RetrievalQA object with a specific chain type and configurations,
-   and returns this QA chain. The retriever is set up to return the top 3 results (k=3).
+   and returns this QA chain.
 
    Args:
        llm (any): The language model to be used in the RetrievalQA.
