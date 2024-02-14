@@ -67,5 +67,5 @@ This will start the chatbot with a web interface.
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-## License
+## 📜 License
 This project is licensed under the terms of the MIT license. For more details, see the LICENSE file.
