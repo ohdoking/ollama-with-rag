@@ -136,6 +136,9 @@ async def process_chat_message(message):
     print(f"response: {res}")
     answer = res["result"]
     source_documents = res["source_documents"]
+    # temporary fix for source_documents
+    for document in source_documents:
+        document.page_content = document.page_content.replace('\n', ' ')
 
     if source_documents:
         answer += f"\nSources: " + str(source_documents)
