@@ -1,0 +1,25 @@
+{
+    "version": "0.1.0",
+    "data": [
+        {
+            "id": 1,
+            "Question": "Come up with a list of adjectives that include the two words \"sporty\" and \"elegant\".?",
+            "Answer": "Sporty, elegant, chic, athletic, fashionable, graceful, suave."
+        },
+        {
+            "id": 2,
+            "Question": "Generate a story that starts with \"It all started with a whisper...\"?",
+            "Answer": "It all started with a whisper in the dead of night. A chill ran through the small town causing the hairs on the back of the neck of locals to stand on end. Little did they know, this was only the beginning. As days went on, the whispers slowly started to grow louder, eventually becoming a full chorus. People started to wonder what strange power was at work here. Rumors of witchcraft and dark magic were whispered in hushed tones until one brave man stepped forth and decided to find out what was really going on. He ventured deep into the woods, and there he found a strange and ancient magical circle, the source of the mysterious whispers. With curiosity and courage, he stepped into the circle and unleashed an ancient power, and it was only then that he discovered the truth..."
+        },
+        {
+            "id": 3,
+            "Question": "Generate an alliterative phrase with the phrase \"blue butterfly\".?",
+            "Answer": "Bonny blue belle."
+        },
+        {
+            "id": 4,
+            "Question": "\"Explain how Facebook determines what posts display on a users newsfeed.\"?",
+            "Answer": "\"Facebook uses a complex algorithm that takes into account several factors to determine which posts should be shown in a users newsfeed. These factors include the type of content, who posted it and how recently the post was made, the users preferences and interactions with posts, the interactions between other users on the post, and more. Facebook also takes into account posts from the users connections, as well as sponsored posts.\""
+        }
+    ]
+}

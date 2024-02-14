@@ -6,3 +6,14 @@ langchainhub
 pypdf
 chainlit
 python-dotenv
+
+transformers
+torch
+torchvision
+torchaudio
+datasets
+evaluate
+rouge_score
+peft
+loralib
+numpy

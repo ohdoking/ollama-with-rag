@@ -1,0 +1,105 @@
+{
+    "version": "0.1.0",
+    "data": [
+        {
+            "id": 1,
+            "Question": "Generate a list of three uses of big data?",
+            "Answer": "1. Big data can be used to identify patterns and trends in customer behavior.\\n2. Big data can be used to improve customer service and experience.\\n3. Big data can be used to develop predictive models for marketing and sales."
+        },
+        {
+            "id": 2,
+            "Question": "Predict the weather tomorrow morning.?",
+            "Answer": "Tomorrow morning is expected to be sunny with temperatures ranging from 15 to 19 degrees Celsius."
+        },
+        {
+            "id": 3,
+            "Question": "Write a story using these three words: life, creation, surprise?",
+            "Answer": "The miracle of life is a never-ending source of creation and surprise. No one can ever know what it holds in store. A single life is filled with unexpected twists and turns, prompting drastic changes in plans and ideas. Each moment offers an opportunity to be creative, to conceive new possibilities, and to be surprised. All of us have a unique opportunity to be creative and to make an impact in this world through our own unique creations. Life is full of surprises, and creation is one of its greatest gifts."
+        },
+        {
+            "id": 4,
+            "Question": "Find a massage therapist in DC.?",
+            "Answer": "A great place to find massage therapists in Washington, DC is the DC Massage Therapy Association. They have a list of certified and insured massage professionals who specialize in a variety of techniques. You can also search online for massage therapists in the DC area who offer their services."
+        },
+        {
+            "id": 5,
+            "Question": "Find a museum in Chicago to visit.?",
+            "Answer": "A great museum to visit in Chicago is The Field Museum. It features exhibitions, interactive displays, and educational programs that explore all aspects of human and natural history."
+        },
+        {
+            "id": 6,
+            "Question": "Calculate the average of these 6 numbers: 2, 6, 9, 4, 10, 18.?",
+            "Answer": "The average of these 6 numbers is 9."
+        },
+        {
+            "id": 7,
+            "Question": "\"What is the abbreviation for United States of America?\"?",
+            "Answer": "\"The abbreviation for United States of America is USA.\""
+        },
+        {
+            "id": 8,
+            "Question": "Make this sentence possessive: \"The girl\\s bike\".?",
+            "Answer": "\"The girls bikes.\""
+        },
+        {
+            "id": 9,
+            "Question": "Name a protein-rich food option.?",
+            "Answer": "Eggs are a great source of protein."
+        },
+        {
+            "id": 10,
+            "Question": "Provide a humorous response to the question \"Why did the chicken cross the road?\"?",
+            "Answer": "To get to the other side - and show the world that chickens CAN be birds of a different feather!"
+        },
+        {
+            "id": 11,
+            "Question": "Tell me a type of monetary unit from Japan.?",
+            "Answer": "The Japanese monetary unit is called the yen."
+        },
+        {
+            "id": 12,
+            "Question": "Create a graphic or logo that visually represents the word \"courage\".?",
+            "Answer": "<No Output>"
+        },
+        {
+            "id": 13,
+            "Question": "Generate a headline for a scientific paper on climate change.?",
+            "Answer": "Climate Change: An Urgent Call for Action"
+        },
+        {
+            "id": 14,
+            "Question": "Explain how the following technology works: Machine learning.?",
+            "Answer": "Machine learning is a type of artificial intelligence that enables computers to learn from experience without explicit programming. It uses algorithms to identify patterns in data, build models from these patterns, and make predictions and decisions based on the models. These algorithms allow computers to improve with experience, without receiving direct guidance or programming."
+        },
+        {
+            "id": 15,
+            "Question": "Formulate a hypothesis about the following situation: A sink is overflowing.?",
+            "Answer": "The hypothesis is that the sink is overflowing due to a blockage in the drain, a faulty seal, or the valve being left open."
+        },
+        {
+            "id": 16,
+            "Question": "Develop a machine learning algorithm to identify spam emails.?",
+            "Answer": "The machine learning algorithm would first collect and process data to identify a set of features present in spam emails. These features might include words or phrases that appear in most spam emails, such as \"claim your prize\" or \"free membership.\" The algorithm would then use this data to train a classifier model to identify spam emails by using supervised learning methods such as logistic regression or decision trees."
+        },
+        {
+            "id": 17,
+            "Question": "Generate a list of ten logical arguments for reducing global plastic production.?",
+            "Answer": "1. Reducing plastic production can reduce the amount of plastic waste entering oceans, lakes and other bodies of water.\\n2. Plastic production requires a significant amount of energy, resulting in high greenhouse gas emissions.\\n3. Plastic production also releases many pollutants and toxins into the environment.\\n4. Reducing plastic production will decrease the demand for fossil fuels, leading to a decrease in their emissions.\\n5. Plastic production involves hazardous chemicals that can contaminate water supplies.\\n6. Plastic production generates large quantities of solid waste, which can leach toxic chemicals into soil.\\n7. Plastic production is expensive, and reducing it can lead to cost savings.\\n8. Plastic takes hundreds of years to decompose, which can lead to land pollution.\\n9. Plastic waste is unlikely to be recycled, which causes environmental damage\\n10. Reducing plastic production can lead to increased sustainability and conservation efforts."
+        },
+        {
+            "id": 18,
+            "Question": "\"How does my cars dashboard works?\"?",
+            "Answer": "\"Your cars dashboard consists of several meters, warning lights and gauges which help you monitor the performance of your car as you drive. These gauges include an odometer for tracking the distance traveled, a tachometer for monitoring the engines speed, a speedometer for tracking your cars speed, an oil pressure gauge for keeping an eye on your cars oil levels, a thermometer to monitor the engine temperature and other gauges that display different types of information to the driver. Warning lights will alert when the vehicle needs maintenance, such as low oil and low fuel levels. Modern cars also offer several more advanced features such as navigation systems, Bluetooth and audio controls, as well as climate control systems.\""
+        },
+        {
+            "id": 19,
+            "Question": "Generate an alliterative phrase with the phrase \"blue butterfly\".?",
+            "Answer": "Bonny blue belle."
+        },
+        {
+            "id": 20,
+            "Question": "\"Explain how Facebook determines what posts display on a users newsfeed.\"?",
+            "Answer": "\"Facebook uses a complex algorithm that takes into account several factors to determine which posts should be shown in a users newsfeed. These factors include the type of content, who posted it and how recently the post was made, the users preferences and interactions with posts, the interactions between other users on the post, and more. Facebook also takes into account posts from the users connections, as well as sponsored posts.\""
+        }
+    ]
+}

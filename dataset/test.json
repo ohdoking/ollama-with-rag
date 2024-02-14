@@ -1,0 +1,20 @@
+{
+    "version": "0.1.0",
+    "data": [
+        {
+            "id": 1,
+            "Question": "What will be weather tommorow?",
+            "Answer": "Tomorrow morning is expected to be sunny with temperatures ranging from 15 to 19 degrees Celsius."
+        },
+        {
+            "id": 2,
+            "Question": "Hew Machine learning technology works?",
+            "Answer": "Machine learning is a type of artificial intelligence that enables computers to learn from experience without explicit programming. It uses algorithms to identify patterns in data, build models from these patterns, and make predictions and decisions based on the models. These algorithms allow computers to improve with experience, without receiving direct guidance or programming."
+        },
+        {
+            "id": 3,
+            "Question": "Which museum we can visit in Chicago?",
+            "Answer": "A great museum to visit in Chicago is The Field Museum. It features exhibitions, interactive displays, and educational programs that explore all aspects of human and natural history."
+        }
+    ]
+}
