@@ -1,23 +1,46 @@
 import os
 
-from langchain import hub
 from langchain.embeddings import GPT4AllEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.llms import Ollama
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
+from langchain.chains import RetrievalQA
+from langchain.prompts import PromptTemplate
 import chainlit as cl
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Set up Retrieval QA model
-QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-mistral")
+# QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-mistral")
+
+prompt_template = """Use the following pieces of context to answer the users question.
+If you don't know the answer, just say that you don't know, don't try to make up an answer.
+ALWAYS return a "SOURCES" part in your answer.
+The "SOURCES" part should be a reference to the source of the document from which you got your answer.
+The example of your response should be:
+
+Context: {context}
+Question: {question}
+
+Only return the helpful answer below and nothing else.
+Helpful answer:
+"""
 
 
-# load the LLM
+def set_custom_prompt():
+    """
+    Prompt template for QA retrieval for each vectorstore
+    """
+    prompt = PromptTemplate(
+        template=prompt_template, input_variables=["context", "question"]
+    )
+    return prompt
+
+
 def load_llm():
     """Load the Language Model."""
     llm = Ollama(
@@ -28,40 +51,83 @@ def load_llm():
     return llm
 
 
-def retrieval_qa_chain(llm, vectorstore):
-    """Set up the Retrieval QA Chain."""
+def retrieval_qa_chain(llm, prompt, vectorstore):
+    """
+   Creates a Retrieval Question-Answering (QA) chain using a given language model, prompt, and database.
+
+   This function initializes a RetrievalQA object with a specific chain type and configurations,
+   and returns this QA chain. The retriever is set up to return the top 3 results (k=3).
+
+   Args:
+       llm (any): The language model to be used in the RetrievalQA.
+       prompt (str): The prompt to be used in the chain type.
+       vectorstore (any): The database to be used as the retriever.
+
+   Returns:
+       RetrievalQA: The initialized QA chain.
+   """
     qa_chain = RetrievalQA.from_chain_type(
         llm,
+        chain_type="stuff",
         retriever=vectorstore.as_retriever(),
-        chain_type_kwargs={"prompt": QA_CHAIN_PROMPT},
+        chain_type_kwargs={"prompt": prompt},
         return_source_documents=True,
     )
     return qa_chain
 
 
-def qa_bot(llm):
-    """Initialize the QA Bot."""
+def create_retrieval_qa_bot():
+    """
+    This function creates a retrieval-based question-answering bot.
+
+    Returns:
+        RetrievalQA: The retrieval-based question-answering bot.
+    """
     vectorstore = Chroma(persist_directory=os.getenv('DB_PATH'), embedding_function=GPT4AllEmbeddings())
 
-    qa = retrieval_qa_chain(llm, vectorstore)
+    try:
+        llm = load_llm()
+    except Exception as e:
+        raise Exception(f"Failed to load model: {str(e)}")
+
+    qa_prompt = (
+        set_custom_prompt()
+    )  # Assuming this function exists and works as expected
+
+    try:
+        qa = retrieval_qa_chain(llm, qa_prompt, vectorstore)  # Assuming this function exists and works as expected
+    except Exception as e:
+        raise Exception(f"Failed to create retrieval QA chain: {str(e)}")
+
     return qa
 
 
 @cl.on_chat_start
 async def start():
-    """Start the chat."""
-    llm = load_llm()
-    chain = qa_bot(llm)
+    """
+    Initializes the bot when a new chat starts.
+
+    This asynchronous function creates a new instance of the retrieval QA bot,
+    sends a welcome message, and stores the bot instance in the user's session.
+    """
+    chain = create_retrieval_qa_bot()
     msg = cl.Message(content="Firing up the research info bot...")
     await msg.send()
-    msg.content = "Hi, welcome to research info bot. What is your query?"
+    msg.content = "Hi, welcome to research info bot by ohdoking. What is your query?"
     await msg.update()
     cl.user_session.set("chain", chain)
 
 
 @cl.on_message
-async def main(message):
-    """Handle incoming messages."""
+async def process_chat_message(message):
+    """
+    Processes incoming chat messages.
+
+    This asynchronous function retrieves the QA bot instance from the user's session,
+    sets up a callback handler for the bot's response, and executes the bot's
+    call method with the given message and callback. The bot's answer and source
+    documents are then extracted from the response.
+    """
     chain = cl.user_session.get("chain")
     cb = cl.AsyncLangchainCallbackHandler(
         stream_final_answer=True,
@@ -71,11 +137,10 @@ async def main(message):
     res = await chain.acall(message.content, callbacks=[cb])
     print(f"response: {res}")
     answer = res["result"]
-    answer = answer.replace(".", ".\n")
-    sources = res["source_documents"]
+    source_documents = res["source_documents"]
 
-    if sources:
-        answer += f"\nSources: " + str(str(sources))
+    if source_documents:
+        answer += f"\nSources: " + str(source_documents)
     else:
         answer += f"\nNo Sources found"
 
