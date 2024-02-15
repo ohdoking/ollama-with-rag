@@ -116,6 +116,30 @@ async def start():
     cl.user_session.set("chain", chain)
 
 
+async def get_chain_response(chain, message_content):
+    """ This function interacts with the chain and returns its response. """
+    cb = cl.AsyncLangchainCallbackHandler(
+        stream_final_answer=True,
+        answer_prefix_tokens=["FINAL", "ANSWER"]
+    )
+    cb.answer_reached = True
+    # Execute the bot's call method with the given message and callback.
+    res = await chain.acall(message_content, callbacks=[cb])
+    print(f"response: {res}")
+    return res
+
+def process_source_documents(source_documents):
+    """ This function processes the source documents and returns a list of text elements. """
+    text_elements = []
+    for source_idx, source_doc in enumerate(source_documents):
+        source_name = f"{os.path.basename(source_doc.metadata['source'])}_{source_idx}"
+        # Create the text element referenced in the message
+        text_elements.append(
+            cl.Text(content=source_doc.page_content.replace('\n', ' '), name=source_name)
+        )
+    source_names = [text_el.name for text_el in text_elements]
+    return text_elements, source_names
+
 @cl.on_message
 async def process_chat_message(message):
     """
@@ -127,23 +151,16 @@ async def process_chat_message(message):
     documents are then extracted from the response.
     """
     chain = cl.user_session.get("chain")
-    cb = cl.AsyncLangchainCallbackHandler(
-        stream_final_answer=True,
-        answer_prefix_tokens=["FINAL", "ANSWER"]
-    )
-    cb.answer_reached = True
-    res = await chain.acall(message.content, callbacks=[cb])
-    print(f"response: {res}")
+    res = await get_chain_response(chain, message.content)
     answer = res["result"]
     source_documents = res["source_documents"]
-    # temporary fix for source_documents
-    for document in source_documents:
-        document.page_content = document.page_content.replace('\n', ' ')
 
-    if source_documents:
-        answer += f"\nSources: " + str(source_documents)
+    text_elements, source_names = process_source_documents(source_documents)
+
+    if source_names:
+        answer += f"\nSources: {', '.join(source_names)}"
     else:
-        answer += f"\nNo Sources found"
+        answer += "\nNo sources found"
 
     # Send a response back to the user
-    await cl.Message(content=answer).send()
+    await cl.Message(content=answer, elements=text_elements).send()
