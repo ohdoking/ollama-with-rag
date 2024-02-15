@@ -112,6 +112,11 @@ async def start():
     msg = cl.Message(content="Firing up the research info bot...")
     await msg.send()
     msg.content = "Hi, welcome to research info bot by ohdoking. What is your query?"
+    msg.author = "ohdoking bot"
+    actions = [
+        cl.Action(name="upload_file", value="example_value", description="upload file")
+    ]
+    msg.actions = actions
     await msg.update()
     cl.user_session.set("chain", chain)
 
@@ -140,6 +145,30 @@ def process_source_documents(source_documents):
     source_names = [text_el.name for text_el in text_elements]
     return text_elements, source_names
 
+@cl.action_callback("upload_file")
+async def on_action(action: cl.Action) -> None:
+    UPLOADED_FILES: list[String] = []
+
+    files = None
+
+    # Wait for the user to upload a file
+    while files is None:
+        files = await cl.AskFileMessage(
+            content="Please upload a text file to begin!", accept=["text/csv"]
+        ).send()
+    # Decode the file
+    text_file = files[0]
+    text = text_file.content.decode("utf-8")
+
+    UPLOADED_FILES.append(text_file)
+
+    # Let the user know that the system is ready
+    await cl.Message(
+        content=f"`{text_file.name}` uploaded, it contains {len(text)} characters!"
+    ).send()
+    await action.remove()
+
+
 @cl.on_message
 async def process_chat_message(message):
     """
@@ -163,4 +192,4 @@ async def process_chat_message(message):
         answer += "\nNo sources found"
 
     # Send a response back to the user
-    await cl.Message(content=answer, elements=text_elements).send()
+    await cl.Message(content=answer, elements=text_elements, author="ohdoking bot").send()
