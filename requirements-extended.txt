@@ -24,7 +24,6 @@ blinker==1.7.0
 bs4==0.0.1
 cachetools==5.3.2
 certifi==2023.7.22
-cffi @ file:///private/tmp/cffi-20231014-5567-1hyue8f/cffi-1.16.0
 chainlit==1.0.200
 chardet==5.2.0
 charset-normalizer==3.2.0
@@ -46,7 +45,6 @@ distro==1.8.0
 dlib==19.24.2
 dnspython==2.4.2
 docstring-parser==0.15
-docutils @ file:///private/tmp/docutils-20231123-5398-yh30nc/docutils-0.20.1
 einops==0.7.0
 emoji==2.10.1
 evaluate==0.4.0
@@ -154,7 +152,6 @@ pyarrow==14.0.2
 pyarrow-hotfix==0.6
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
-pycparser @ file:///private/tmp/pycparser-20231013-5787-1anpge2/pycparser-2.21
 pydantic==2.5.2
 pydantic_core==2.14.5
 pydeck==0.8.1b0
